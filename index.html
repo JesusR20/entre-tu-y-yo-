@@ -5,248 +5,208 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Entre tú y yo</title>
   <style>
-    /* FONDO DE GALAXIA ANIMADO */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(-45deg, #141e30, #243b55, #3a1c3d, #1e3c72);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      background: url('https://i.ibb.co/8Xq0fGz/icon-512.png') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
-      text-align: center;
-      height: 100vh;
-      overflow: auto;
-      position: relative;
+      min-height: 100vh;
     }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .overlay {
+      background: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 20px;
     }
-
-    /* ESTRELLAS ANIMADAS */
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: twinkle 2s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0.2; }
-      50% { opacity: 1; }
-      100% { opacity: 0.2; }
-    }
-
-    /* CORAZONES FLOTANTES */
-    .heart {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 30px;
-      color: #ff69b4;
-      animation: beat 1s infinite, float 3s infinite alternate;
-      cursor: pointer;
-      z-index: 100;
-    }
-
-    @keyframes beat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-15px); }
-    }
-
-    /* TÍTULO */
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 3.5em;
+      text-align: center;
       margin-top: 50px;
       color: #ff99aa;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
-
-    /* BOTONES CON BRILLO */
     .btn {
       display: block;
-      width: 85%;
-      max-width: 320px;
-      margin: 25px auto;
+      width: 80%;
+      max-width: 300px;
+      margin: 30px auto;
       padding: 18px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.2);
       border: 2px solid #ff99aa;
       border-radius: 20px;
       color: white;
-      font-size: 1.3em;
+      font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
     }
-
     .btn:hover {
-      background: rgba(255, 150, 180, 0.3);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 15px rgba(255, 100, 150, 0.4);
+      background: rgba(255,150,180,0.4);
+      transform: scale(1.05);
     }
-
-    /* PANTALLAS OCULTAS */
     .screen {
       display: none;
       padding: 20px;
-      margin: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      border: 1px solid #ff99aa;
     }
-
     .back-btn {
-      margin-top: 20px;
       background: #555 !important;
-      border: 1px solid #aaa !important;
+      margin-top: 30px;
     }
-
-    /* ENTRADAS DE DIARIO */
-    .entry {
-      background: rgba(255, 255, 255, 0.1);
+    /* Notas */
+    .note {
+      background: rgba(255,255,255,0.15);
       margin: 10px auto;
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 15px;
       max-width: 90%;
       text-align: left;
       font-style: italic;
+      border-left: 4px solid #ff99aa;
     }
-
-    input, textarea, button {
-      font-family: inherit;
-    }
-
-    /* CUENTA REGRESIVA */
-    .countdown {
-      font-size: 2em;
-      margin: 20px;
+    .note-author {
+      font-weight: bold;
       color: #ffcc00;
-      text-shadow: 0 0 10px rgba(255, 200, 0, 0.5);
     }
-
-    /* MISIÓN */
-    .mission-progress {
-      font-size: 1.2em;
-      margin: 20px;
-      color: #98fb98;
+    .note-date {
+      font-size: 0.8em;
+      color: #ccc;
+    }
+    /* Frase grande */
+    .big-phrase {
+      font-size: 2em;
+      margin: 60px 20px;
+      text-align: center;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    /* Cuenta regresiva */
+    .countdown {
+      font-size: 2.5em;
+      text-align: center;
+      margin: 40px;
+      color: #ffcc00;
+    }
+    /* Código */
+    #code-input {
+      width: 80%;
+      max-width: 300px;
+      padding: 12px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      border: none;
+      text-align: center;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- FONDO DE ESTRELLAS -->
-  <div class="stars" id="stars"></div>
-
-  <!-- PANTALLA PRINCIPAL -->
-  <div id="home" class="overlay">
+  <!-- Pantalla: Código secreto -->
+  <div id="welcome" class="screen" style="display:block; text-align:center; padding:60px;">
     <h1>Entre tú y yo</h1>
-    <button class="btn" onclick="showScreen('diary')">📓 Mi diario de sentimientos</button>
-    <button class="btn" onclick="showRandomPhrase()">💬 Frase aleatoria</button>
-    <button class="btn" onclick="showScreen('letters')">📅 Cartas del tiempo</button>
-    <button class="btn" onclick="showScreen('missions')">🏆 Mis misiones secretas</button>
-    <button class="btn" onclick="showScreen('countdown')">⏳ Próxima cita</button>
-    <div class="heart">❤️</div>
+    <p style="margin:20px;">Ingresa el código para entrar:</p>
+    <input type="text" id="code-input" placeholder="Código secreto">
+    <button class="btn" onclick="checkCode()">🔓 Entrar</button>
   </div>
 
-  <!-- DIARIO -->
+  <!-- Home -->
+  <div id="home" class="screen">
+    <h1>Entre tú y yo</h1>
+    <button class="btn" onclick="show('diary')">📓 Diario de sentimientos</button>
+    <button class="btn" onclick="show('phrase')">💬 Frase aleatoria</button>
+    <button class="btn" onclick="show('countdown')">⏳ Próxima cita</button>
+    <button class="btn" onclick="admin()">🔐 Modo especial</button>
+  </div>
+
+  <!-- Diario -->
   <div id="diary" class="screen">
-    <h2>📖 Mi diario</h2>
-    <p>Agrega un sentimiento especial...</p>
-    <input type="text" id="author" placeholder="¿Tú o ella?" style="width:80%; padding:10px; margin:10px; border-radius:10px; border:none;">
-    <textarea id="message" placeholder="Escribe lo que sientes..." style="width:80%; height:100px; padding:10px; margin:10px; border-radius:10px; border:none;"></textarea>
-    <button class="btn" onclick="addDiaryEntry()">➕ Añadir entrada</button>
-    <div id="diary-entries"></div>
-    <button class="btn back-btn" onclick="goHome()">← Volver</button>
+    <h2 style="text-align:center; margin:20px;">📖 Nuestras notas</h2>
+    <input type="text" id="author" placeholder="¿Tú o ella?" style="width:80%; padding:12px; margin:10px auto; display:block; border-radius:10px; border:none;">
+    <textarea id="msg" placeholder="Escribe lo que sientes..." style="width:80%; height:100px; margin:10px auto; display:block; padding:12px; border-radius:10px; border:none;"></textarea>
+    <button class="btn" onclick="addNote()">📤 Enviar nota</button>
+    <div id="notes"></div>
+    <button class="btn back-btn" onclick="show('home')">← Volver</button>
   </div>
 
-  <!-- FRASE ALEATORIA -->
+  <!-- Frase -->
   <div id="phrase" class="screen">
-    <h2>💬 Frase de amor</h2>
-    <p id="random-phrase" style="font-size:1.4em; margin:30px;">Toca el botón para ver una frase.</p>
-    <button class="btn" onclick="showRandomPhrase()">🔄 Nueva frase</button>
-    <button class="btn back-btn" onclick="goHome()">← Volver</button>
+    <h2 style="text-align:center; margin:20px;">💬 Frase de amor</h2>
+    <p id="phrase-text" class="big-phrase">Toca el botón para ver una frase.</p>
+    <button class="btn" onclick="randomPhrase()">✨ Mostrar frase</button>
+    <button class="btn back-btn" onclick="show('home')">← Volver</button>
   </div>
 
-  <!-- CARTAS POR FECHA -->
-  <div id="letters" class="screen">
-    <h2>📬 Cartas del tiempo</h2>
-    <p>Algunas cartas solo aparecen en ciertos días...</p>
-    <div id="scheduled-letters"></div>
-    <button class="btn back-btn" onclick="goHome()">← Volver</button>
-  </div>
-
-  <!-- MISIÓN -->
-  <div id="missions" class="screen">
-    <h2>🏆 Mis misiones secretas</h2>
-    <p id="mission-status">🔒 Accede al modo admin para ver tus misiones.</p>
-    <div id="admin-panel" style="display:none;">
-      <p><strong>Misión:</strong> Ella suba 3 fotos → tú desbloqueas una foto especial.</p>
-      <p id="mission-progress">Progreso: 0/3 fotos</p>
-      <button class="btn" onclick="advanceMission()">➕ Añadir foto (simulación)</button>
-      <button class="btn" onclick="unlockSpecial()">🔓 Desbloquear foto especial</button>
-      <img id="special-img" src="" style="max-width:80%; border-radius:15px; margin:20px; display:none;">
-    </div>
-    <button class="btn back-btn" onclick="goHome()">← Volver</button>
-  </div>
-
-  <!-- CUENTA REGRESIVA -->
+  <!-- Cuenta regresiva -->
   <div id="countdown" class="screen">
-    <h2>⏳ Próxima cita</h2>
-    <p>¿Cuándo volverán a verse?</p>
-    <input type="date" id="next-date" style="padding:10px; margin:10px; border-radius:10px; border:none; display:none;">
-    <button class="btn" id="set-date-btn" onclick="toggleDateInput()">📅 Cambiar fecha (admin)</button>
-    <div class="countdown" id="countdown-timer">Cargando...</div>
-    <button class="btn back-btn" onclick="goHome()">← Volver</button>
+    <h2 style="text-align:center; margin:20px;">⏳ Próxima cita</h2>
+    <div class="countdown" id="count-text">Cargando...</div>
+    <button class="btn" onclick="setDate()">📅 Cambiar fecha</button>
+    <button class="btn back-btn" onclick="show('home')">← Volver</button>
   </div>
 
   <script>
-    // CONTRASEÑA ADMIN
-    const ADMIN_PASS = "SB";
-    let adminMode = false;
-    let missionPhotos = 0;
-    const specialImageUrl = "https://img.freepik.com/fotos-premium/hermosa-sonrisa-mujer-joven-feliz-fondo-rosa_902995-12559.jpg"; // Cambia esta URL por tu foto especial
+    // 🔐 Código secreto
+    const SECRET_CODE = "AMOR2025"; // Cambia este código
+    let authenticated = false;
 
-    // Crear estrellas animadas
-    function createStars() {
-      const stars = document.getElementById('stars');
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        stars.appendChild(star);
+    function checkCode() {
+      const code = document.getElementById('code-input').value;
+      if (code === SECRET_CODE) {
+        authenticated = true;
+        show('home');
+        loadNotes();
+        updateCountdown();
+      } else {
+        alert("❌ Código incorrecto. Pídele el código a tu amor.");
       }
     }
 
-    // Frases aleatorias
-    let frases = [
+    function show(screen) {
+      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+      document.getElementById(screen).style.display = 'block';
+      if (screen === 'diary') loadNotes();
+      if (screen === 'countdown') updateCountdown();
+    }
+
+    // 📓 Diario
+    function addNote() {
+      const author = document.getElementById('author').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      if (!author || !msg) {
+        alert("Por favor, llena todos los campos.");
+        return;
+      }
+      const note = {
+        author,
+        msg,
+        date: new Date().toLocaleString('es-ES')
+      };
+      const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+      notes.push(note);
+      localStorage.setItem('notes', JSON.stringify(notes));
+      document.getElementById('msg').value = '';
+      loadNotes();
+    }
+
+    function loadNotes() {
+      const container = document.getElementById('notes');
+      const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+      container.innerHTML = '';
+      notes.slice().reverse().forEach(n => {
+        const div = document.createElement('div');
+        div.className = 'note';
+        div.innerHTML = `
+          <span class="note-author">${n.author}</span>: ${n.msg}
+          <div class="note-date">${n.date}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // 💬 Frases
+    const frases = [
       "Tu sonrisa es mi lugar favorito del mundo.",
       "Cada segundo contigo es un regalo.",
       "Eres mi hoy y todos mis mañanas.",
@@ -254,163 +214,43 @@
       "Me enamoro de ti una y otra vez."
     ];
 
-    // Diario (almacenado en el navegador)
-    function loadDiary() {
-      const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
-      const container = document.getElementById('diary-entries');
-      container.innerHTML = '';
-      entries.forEach(entry => {
-        const div = document.createElement('div');
-        div.classList.add('entry');
-        div.innerHTML = `<strong>${entry.author}</strong> (${entry.date})<br>${entry.message}`;
-        container.appendChild(div);
-      });
+    function randomPhrase() {
+      const frase = frases[Math.floor(Math.random() * frases.length)];
+      document.getElementById('phrase-text').textContent = frase;
     }
 
-    function addDiaryEntry() {
-      const author = document.getElementById('author').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if (!author || !message) {
-        alert("Por favor, llena todos los campos.");
-        return;
-      }
-      const newEntry = {
-        author,
-        message,
-        date: new Date().toLocaleDateString('es-ES')
-      };
-      const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
-      entries.push(newEntry);
-      localStorage.setItem('diaryEntries', JSON.stringify(entries));
-      document.getElementById('author').value = '';
-      document.getElementById('message').value = '';
-      loadDiary();
-      alert("✨ Entrada guardada con amor.");
-    }
-
-    // Frase aleatoria
-    function showRandomPhrase() {
-      const phrase = frases[Math.floor(Math.random() * frases.length)];
-      document.getElementById('random-phrase').textContent = phrase;
-      showScreen('phrase');
-    }
-
-    // Modo admin (tocar 5 veces)
-    let clickCount = 0;
-    document.querySelector('h1').addEventListener('click', () => {
-      clickCount++;
-      if (clickCount >= 5 && !adminMode) {
-        const pass = prompt("🔐 Ingresa la contraseña:");
-        if (pass === ADMIN_PASS) {
-          adminMode = true;
-          alert("✅ Modo administrador activado");
-          document.getElementById('set-date-btn').style.display = 'block';
-          document.getElementById('next-date').style.display = 'block';
-          document.getElementById('mission-status').style.display = 'none';
-          document.getElementById('admin-panel').style.display = 'block';
-          updateMissionProgress();
-        }
-        clickCount = 0;
-      }
-    });
-
-    // Misiones
-    function advanceMission() {
-      missionPhotos++;
-      updateMissionProgress();
-      localStorage.setItem('missionPhotos', missionPhotos);
-    }
-
-    function updateMissionProgress() {
-      document.getElementById('mission-progress').textContent = `Progreso: ${missionPhotos}/3 fotos`;
-      if (missionPhotos >= 3) {
-        document.getElementById('special-img').src = specialImageUrl;
-        document.getElementById('special-img').style.display = 'block';
-      }
-    }
-
-    function unlockSpecial() {
-      if (missionPhotos >= 3) {
-        alert("🎉 ¡Has desbloqueado una foto muy especial! ❤️");
-      } else {
-        alert(`Faltan ${3 - missionPhotos} fotos para desbloquear.`);
-      }
-    }
-
-    // Cuenta regresiva
+    // ⏳ Cuenta regresiva
     function updateCountdown() {
-      let nextDateStr = localStorage.getItem('nextCitaDate');
-      if (!nextDateStr) {
-        nextDateStr = '2025-06-15'; // Fecha por defecto
-        localStorage.setItem('nextCitaDate', nextDateStr);
-      }
-      document.getElementById('next-date').value = nextDateStr;
-
+      let saved = localStorage.getItem('nextDate') || '2025-06-15';
       const now = new Date();
-      const nextDate = new Date(nextDateStr);
-      const diff = nextDate - now;
+      const then = new Date(saved);
+      const diff = Math.floor((then - now) / (1000*60*60*24));
+      document.getElementById('count-text').textContent = 
+        diff > 0 ? `Faltan ${diff} días` : "🎉 ¡Hoy es el día!";
+    }
 
-      if (diff <= 0) {
-        document.getElementById('countdown-timer').textContent = "🎉 ¡Hoy es el día! ¡Disfruten!";
+    function setDate() {
+      const date = prompt("Ingresa la fecha de la cita (AAAA-MM-DD):");
+      if (date) {
+        localStorage.setItem('nextDate', date);
+        updateCountdown();
+        alert("📅 Fecha guardada");
+      }
+    }
+
+    // 🔐 Modo admin
+    function admin() {
+      const pass = prompt("🔐 Contraseña:");
+      if (pass === "SB") {
+        alert("✅ Modo especial activado");
+        // Aquí puedes añadir funciones solo para ti
       } else {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('countdown-timer').textContent = `Faltan ${days} días y ${hours} horas`;
+        alert("❌ No es tu momento");
       }
-    }
-
-    function toggleDateInput() {
-      if (adminMode) {
-        const newDate = document.getElementById('next-date').value;
-        if (newDate) {
-          localStorage.setItem('nextCitaDate', newDate);
-          updateCountdown();
-          alert("📅 Fecha actualizada");
-        }
-      }
-    }
-
-    // Programar cartas por fecha
-    function loadScheduledLetters() {
-      const today = new Date().toLocaleDateString('es-ES');
-      const letters = {
-        '14/08/2025': '¡Ábreme el 14 de agosto! Hoy es tu día especial 💖',
-        '01/01/2025': 'Feliz Año Nuevo, amor. Este año será de nosotros 🌟'
-      };
-
-      const container = document.getElementById('scheduled-letters');
-      const day = today.split(',')[0]; // Formato: "14/8/2024"
-      if (letters[today]) {
-        const p = document.createElement('p');
-        p.textContent = letters[today];
-        p.style.fontSize = '1.3em';
-        p.style.color = '#ffcc00';
-        container.appendChild(p);
-      } else {
-        container.innerHTML = '<p>Hoy no hay cartas especiales... pero tu amor sí brilla.</p>';
-      }
-    }
-
-    // Navegación
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      if (id === 'countdown') updateCountdown();
-      if (id === 'diary') loadDiary();
-      if (id === 'letters') loadScheduledLetters();
-    }
-
-    function goHome() {
-      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-      document.getElementById('home').style.display = 'block';
     }
 
     // Iniciar
-    window.onload = () => {
-      createStars();
-      missionPhotos = parseInt(localStorage.getItem('missionPhotos') || 0);
-      if (adminMode) updateMissionProgress();
-    };
+    if (authenticated) show('home');
   </script>
 </body>
 </html>
